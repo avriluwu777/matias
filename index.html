@@ -1,11 +1,333 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>PlayStation 2 Store</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #000;
+      color: #ccc;
+    }
+
+    /* === HEADER SUPERIOR === */
+    .header {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to bottom, #333, #111);
+      padding: 5px 10px;
+    }
+    .header .logo {
+      height: 40px;
+      margin-right: 20px;
+    }
+    .header nav {
+      display: flex;
+      flex-grow: 1;
+    }
+    .header nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: bold;
+      margin-right: 15px;
+      padding: 6px 10px;
+      background: linear-gradient(to bottom, #444, #222);
+      border: 1px solid #000;
+      border-radius: 2px;
+    }
+    .header nav a:hover {
+      background: linear-gradient(to bottom, #666, #333);
+    }
+    .header .login {
+      font-size: 11px;
+      color: #aaa;
+    }
+    .header input {
+      background: #000;
+      border: 1px solid #333;
+      color: #ccc;
+      padding: 3px 5px;
+      margin-left: 5px;
+      font-size: 11px;
+    }
+    .header button {
+      background: linear-gradient(to bottom, #666, #333);
+      border: 1px solid #000;
+      color: #fff;
+      font-size: 11px;
+      padding: 3px 8px;
+      margin-left: 3px;
+      cursor: pointer;
+    }
+
+    /* === BANNER CONSOLA === */
+    .console-banner {
+      text-align: center;
+      background: #000;
+      padding: 15px 0;
+      border-bottom: 2px solid #111;
+    }
+    .console-banner img {
+      max-width: 600px;
+    }
+    .console-banner .slogan {
+      color: #f00;
+      font-weight: bold;
+      font-size: 20px;
+      margin-top: 5px;
+    }
+    .console-banner .playbeyond {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    /* === TABS (PS3/PSP/PS2) === */
+    .tabs {
+      display: flex;
+      background: linear-gradient(to bottom, #3a3a3a, #111);
+      border-bottom: 2px solid #000;
+      text-align: center;
+    }
+    .tabs a {
+      flex: 1;
+      color: #ccc;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 0;
+      border-right: 1px solid #000;
+      cursor: pointer;
+    }
+    .tabs a:last-child {
+      border-right: none;
+    }
+    .tabs a.active {
+      background: linear-gradient(to bottom, #555, #222);
+      color: #fff;
+    }
+    .tabs a:hover {
+      background: linear-gradient(to bottom, #555, #222);
+      color: #fff;
+    }
+
+    /* === SECCIÓN INFERIOR === */
+    .bottom {
+      display: flex;
+      background: #111;
+      border-top: 2px solid #000;
+      padding: 10px;
+    }
+
+    /* Columna izquierda (juegos) */
+    .left {
+      flex: 1;
+      margin-right: 10px;
+      background: linear-gradient(to bottom, #1a1a1a, #000);
+      border: 1px solid #222;
+    }
+    .tabs-small {
+      display: flex;
+      background: linear-gradient(to bottom, #333, #111);
+      font-size: 11px;
+    }
+    .tabs-small div {
+      flex: 1;
+      padding: 5px;
+      text-align: center;
+      border-right: 1px solid #000;
+      cursor: pointer;
+      color: #aaa;
+    }
+    .tabs-small div.active {
+      background: linear-gradient(to bottom, #555, #222);
+      color: #fff;
+    }
+    .game-list {
+      padding: 5px;
+      font-size: 12px;
+    }
+    .game {
+      display: flex;
+      margin: 8px 0;
+      border-bottom: 1px solid #222;
+      padding-bottom: 5px;
+    }
+    .game img {
+  width: 100px;         /* ancho fijo */
+  height: 140px;        /* alto fijo (estilo caja de juego) */
+  object-fit: cover;    /* recorta la imagen sin deformarla */
+  margin-right: 10px;
+  border: 1px solid #333;
+}
+    .game-info {
+      flex: 1;
+    }
+    .game-info a {
+      color: #f33;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Columna derecha (noticias) */
+    .right {
+      flex: 1;
+      background: linear-gradient(to bottom, #1a1a1a, #000);
+      border: 1px solid #222;
+      margin-left: 10px;
+    }
+    .tabs-small2 {
+      display: flex;
+      background: linear-gradient(to bottom, #333, #111);
+      font-size: 11px;
+    }
+    .tabs-small2 div {
+      flex: 1;
+      padding: 5px;
+      text-align: center;
+      border-right: 1px solid #000;
+      cursor: pointer;
+      color: #aaa;
+    }
+    .tabs-small2 div.active {
+      background: linear-gradient(to bottom, #555, #222);
+      color: #fff;
+    }
+    .news {
+      padding: 10px;
+      font-size: 12px;
+    }
+    .news h4 {
+      margin: 0;
+      color: #f90;
+      font-size: 13px;
+    }
+    .news p {
+      margin: 5px 0 10px 0;
+      color: #bbb;
+    }
+  </style>
 </head>
 <body>
-    
+
+  <!-- HEADER SUPERIOR -->
+  <div class="header">
+    <img class="logo" src="https://www.cdnlogo.com/logos/p/29/playstation-2.svg" alt="PS Logo">
+    <nav>
+      <a href="#">GAMES</a>
+      <a href="#">MEDIA & DOWNLOADS</a>
+      <a href="#">NEWS</a>
+      <a href="#">FORUMS</a>
+      <a href="#">SUPPORT</a>
+    </nav>
+    <div class="login">
+      <input type="text" placeholder="Email Address">
+      <input type="password" placeholder="Password">
+      <button>></button>
+      <button>Search</button>
+    </div>
+  </div>
+
+  <!-- BANNER CONSOLA -->
+  <div class="console-banner">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Sony-PlayStation-2-30001-wController-L.png" alt="PS2 Console">
+    <div class="slogan">PLAYSTATION 2</div>
+    <div class="playbeyond">PLAY B3YOND</div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <a href="#" data-console="ps3">PS3</a>
+    <a href="#" data-console="psp">PSP</a>
+    <a href="#" data-console="ps2" class="active">PS2</a>
+  </div>
+
+  <!-- SECCIÓN INFERIOR -->
+  <div class="bottom">
+    <!-- Columna izquierda -->
+    <div class="left">
+      <div class="tabs-small">
+        <div>NEW GAMES</div>
+        <div>UPCOMING GAMES</div>
+        <div class="active">TOP GAMES</div>
+      </div>
+      <div class="game-list" id="game-list">
+        <!-- Juegos se cargan dinámicamente -->
+      </div>
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="right">
+      <div class="tabs-small2">
+        <div>NEWS & PRESS</div>
+        <div class="active">EVENTS & PROMOTIONS</div>
+      </div>
+      <div class="news">
+        <h4>ROBOT CHICKEN™ Contest</h4>
+        <p>Want a chance to win a PLAYSTATION®3 and appear in an episode of ROBOT CHICKEN™?</p>
+       
+        <h4>PlayStation® tears up the terrain!</h4>
+        <p>We're bringing dirty back! Celebrate offroad fanatics featuring great games, contests and prizes from...</p>
+       
+        <h4>Free Demo Disk Offer</h4>
+        <p>Click here to find out how you can get a free demo disk from the LRCT crew!</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const gamesData = {
+      ps2: [
+        { title: "Silent Hill 2", console: "PLAYSTATION®2", img: "https://wowroms-photos.com/emulators-roms-logo/41/120457/420-420/Silent+Hill+2+(USA)+(En,Ja,Fr,De,Es,It)+(v2.01)-image.jpg", link: "#" },
+        { title: "Black", console: "PLAYSTATION®2", img: "https://media.vandal.net/ivandal/12/63/1200x630/47/4704/200622723939_1.jpg", link: "#" },
+        { title: "Gran Turismo 4", console: "PLAYSTATION®2", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcAIYvho3VJa3vrvnEeqzxAa51i7k-p-bKdA&s", link: "#" }
+      ],
+      ps3: [
+        { title: "Call of Duty: Black Ops", console: "PLAYSTATION®3", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtfaoE3_QNsfJGywXHE3_Xmlo6ck--35cayg&s", link: "#" },
+        { title: "Red Dead Redemption", console: "PLAYSTATION®3", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF1htw1C1uRRsVHzt59q9BN5z1ylFLPojDTg&s", link: "#" },
+        { title: "Grand Theft Auto V", console: "PLAYSTATION®3", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0OHzZ1JAkkEu_Bdc_5fZDvRpRUrTKUNxIg&s", link: "#" }
+      ],
+      psp: [
+        { title: "Silent Hill: Origins", console: "PSP", img: "https://static.wikia.nocookie.net/silenthill/images/6/67/SH0UK.jpg/revision/latest?cb=20110812093753&path-prefix=es", link: "#" },
+        { title: "Silent Hill: Shattered Memories", console: "PSP", img: "https://m.media-amazon.com/images/I/81Y55s6cfaS._UF894,1000_QL80_.jpg", link: "#" },
+        { title: "Metal Gear Solid: Peace Walker", console: "PSP", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZRJWGs-eCTy_hbwnLTeLSHttII0ZEzS8XkA&s", link: "#" }
+      ]
+    };
+
+    const gameList = document.getElementById("game-list");
+    const tabs = document.querySelectorAll(".tabs a");
+
+    function loadGames(consoleType) {
+      gameList.innerHTML = "";
+      gamesData[consoleType].forEach(game => {
+        const div = document.createElement("div");
+        div.classList.add("game");
+        div.innerHTML = `
+          <img src="${game.img}" alt="${game.title}">
+          <div class="game-info">
+            <a href="${game.link}">${game.title}</a><br>
+            ${game.console} <br>
+            <a href="#">Official Game Site</a>
+          </div>
+        `;
+        gameList.appendChild(div);
+      });
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", (e) => {
+        e.preventDefault();
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        const consoleType = tab.getAttribute("data-console");
+        loadGames(consoleType);
+      });
+    });
+
+    // Cargar PS2 por defecto
+    loadGames("ps2");
+  </script>
+
 </body>
 </html>
