@@ -11,207 +11,94 @@
       color: #ccc;
     }
 
-    /* === HEADER SUPERIOR === */
+    /* HEADER */
     .header {
       display: flex;
       align-items: center;
       background: linear-gradient(to bottom, #333, #111);
       padding: 5px 10px;
     }
-    .header .logo {
-      height: 40px;
-      margin-right: 20px;
-    }
-    .header nav {
-      display: flex;
-      flex-grow: 1;
-    }
+    .header .logo { height: 40px; margin-right: 20px; }
+    .header nav { display: flex; flex-grow: 1; }
     .header nav a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: bold;
-      margin-right: 15px;
-      padding: 6px 10px;
+      color: #fff; text-decoration: none; font-size: 12px; font-weight: bold;
+      margin-right: 15px; padding: 6px 10px;
       background: linear-gradient(to bottom, #444, #222);
-      border: 1px solid #000;
-      border-radius: 2px;
+      border: 1px solid #000; border-radius: 2px;
     }
-    .header nav a:hover {
-      background: linear-gradient(to bottom, #666, #333);
-    }
-    .header .login {
-      font-size: 11px;
-      color: #aaa;
-    }
+    .header nav a:hover { background: linear-gradient(to bottom, #666, #333); }
+
+    .header .login { font-size: 11px; color: #aaa; }
     .header input {
-      background: #000;
-      border: 1px solid #333;
-      color: #ccc;
-      padding: 3px 5px;
-      margin-left: 5px;
-      font-size: 11px;
+      background: #000; border: 1px solid #333; color: #ccc;
+      padding: 3px 5px; margin-left: 5px; font-size: 11px;
     }
     .header button {
       background: linear-gradient(to bottom, #666, #333);
-      border: 1px solid #000;
-      color: #fff;
-      font-size: 11px;
-      padding: 3px 8px;
-      margin-left: 3px;
-      cursor: pointer;
+      border: 1px solid #000; color: #fff;
+      font-size: 11px; padding: 3px 8px; margin-left: 3px; cursor: pointer;
     }
 
-    /* === BANNER CONSOLA === */
+    /* BANNER */
     .console-banner {
-      text-align: center;
-      background: #000;
-      padding: 15px 0;
-      border-bottom: 2px solid #111;
+      text-align: center; background: #000; padding: 15px 0; border-bottom: 2px solid #111;
     }
-    .console-banner img {
-      max-width: 600px;
-    }
-    .console-banner .slogan {
-      color: #f00;
-      font-weight: bold;
-      font-size: 20px;
-      margin-top: 5px;
-    }
-    .console-banner .playbeyond {
-      margin-top: 5px;
-      font-size: 14px;
-      color: #aaa;
-    }
+    .console-banner img { max-width: 600px; }
+    .console-banner .slogan { color: #f00; font-weight: bold; font-size: 20px; margin-top: 5px; }
+    .console-banner .playbeyond { margin-top: 5px; font-size: 14px; color: #aaa; }
 
-    /* === TABS (PS3/PSP/PS2) === */
+    /* TABS */
     .tabs {
-      display: flex;
-      background: linear-gradient(to bottom, #3a3a3a, #111);
-      border-bottom: 2px solid #000;
-      text-align: center;
+      display: flex; background: linear-gradient(to bottom, #3a3a3a, #111);
+      border-bottom: 2px solid #000; text-align: center;
     }
     .tabs a {
-      flex: 1;
-      color: #ccc;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 10px 0;
-      border-right: 1px solid #000;
-      cursor: pointer;
+      flex: 1; color: #ccc; text-decoration: none; font-weight: bold;
+      padding: 10px 0; border-right: 1px solid #000; cursor: pointer;
     }
-    .tabs a:last-child {
-      border-right: none;
-    }
-    .tabs a.active {
-      background: linear-gradient(to bottom, #555, #222);
-      color: #fff;
-    }
-    .tabs a:hover {
-      background: linear-gradient(to bottom, #555, #222);
-      color: #fff;
-    }
+    .tabs a.active { background: linear-gradient(to bottom, #555, #222); color: #fff; }
 
-    /* === SECCIÓN INFERIOR === */
-    .bottom {
-      display: flex;
-      background: #111;
-      border-top: 2px solid #000;
-      padding: 10px;
-    }
-
-    /* Columna izquierda (juegos) */
+    /* BOTTOM */
+    .bottom { display: flex; background: #111; border-top: 2px solid #000; padding: 10px; }
     .left {
-      flex: 1;
-      margin-right: 10px;
-      background: linear-gradient(to bottom, #1a1a1a, #000);
-      border: 1px solid #222;
+      flex: 1; margin-right: 10px; background: linear-gradient(to bottom, #1a1a1a, #000);
+      border: 1px solid #222; padding: 10px;
     }
-    .tabs-small {
-      display: flex;
-      background: linear-gradient(to bottom, #333, #111);
-      font-size: 11px;
-    }
-    .tabs-small div {
-      flex: 1;
-      padding: 5px;
-      text-align: center;
-      border-right: 1px solid #000;
-      cursor: pointer;
-      color: #aaa;
-    }
-    .tabs-small div.active {
-      background: linear-gradient(to bottom, #555, #222);
-      color: #fff;
-    }
-    .game-list {
-      padding: 5px;
-      font-size: 12px;
-    }
+    .game-list { font-size: 12px; }
     .game {
-      display: flex;
-      margin: 8px 0;
-      border-bottom: 1px solid #222;
-      padding-bottom: 5px;
+      display: flex; margin: 8px 0; border-bottom: 1px solid #222; padding-bottom: 5px; cursor: pointer;
     }
     .game img {
-  width: 100px;         /* ancho fijo */
-  height: 140px;        /* alto fijo (estilo caja de juego) */
-  object-fit: cover;    /* recorta la imagen sin deformarla */
-  margin-right: 10px;
-  border: 1px solid #333;
-}
-    .game-info {
-      flex: 1;
+      width: 100px; height: 140px; object-fit: cover;
+      margin-right: 10px; border: 1px solid #333;
     }
-    .game-info a {
-      color: #f33;
-      text-decoration: none;
-      font-weight: bold;
+    .game-info { flex: 1; }
+    .game-info a { color: #f33; text-decoration: none; font-weight: bold; }
+
+    /* RIGHT */
+    .right {
+      flex: 1; background: linear-gradient(to bottom, #1a1a1a, #000);
+      border: 1px solid #222; margin-left: 10px; padding: 10px;
     }
 
-    /* Columna derecha (noticias) */
-    .right {
-      flex: 1;
-      background: linear-gradient(to bottom, #1a1a1a, #000);
-      border: 1px solid #222;
-      margin-left: 10px;
+    /* DETALLE DEL JUEGO */
+    .game-detail {
+      display: none; margin-top: 15px; background: #000; padding: 10px; border: 1px solid #333;
     }
-    .tabs-small2 {
-      display: flex;
-      background: linear-gradient(to bottom, #333, #111);
-      font-size: 11px;
+    .carousel {
+      display: flex; align-items: center; justify-content: center; margin-bottom: 10px;
     }
-    .tabs-small2 div {
-      flex: 1;
-      padding: 5px;
-      text-align: center;
-      border-right: 1px solid #000;
-      cursor: pointer;
-      color: #aaa;
+    .carousel img {
+      width: 200px; height: 130px; object-fit: cover; border: 1px solid #444; margin: 0 10px;
     }
-    .tabs-small2 div.active {
-      background: linear-gradient(to bottom, #555, #222);
-      color: #fff;
-    }
-    .news {
-      padding: 10px;
-      font-size: 12px;
-    }
-    .news h4 {
-      margin: 0;
-      color: #f90;
-      font-size: 13px;
-    }
-    .news p {
-      margin: 5px 0 10px 0;
-      color: #bbb;
+    .carousel button {
+      background: #333; color: #fff; border: none; padding: 5px 10px; cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER SUPERIOR -->
+  <!-- HEADER -->
   <div class="header">
     <img class="logo" src="https://www.cdnlogo.com/logos/p/29/playstation-2.svg" alt="PS Logo">
     <nav>
@@ -229,7 +116,7 @@
     </div>
   </div>
 
-  <!-- BANNER CONSOLA -->
+  <!-- BANNER -->
   <div class="console-banner">
     <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Sony-PlayStation-2-30001-wController-L.png" alt="PS2 Console">
     <div class="slogan">PLAYSTATION 2</div>
@@ -243,60 +130,127 @@
     <a href="#" data-console="ps2" class="active">PS2</a>
   </div>
 
-  <!-- SECCIÓN INFERIOR -->
+  <!-- BOTTOM -->
   <div class="bottom">
-    <!-- Columna izquierda -->
+    <!-- LISTA DE JUEGOS -->
     <div class="left">
-      <div class="tabs-small">
-        <div>NEW GAMES</div>
-        <div>UPCOMING GAMES</div>
-        <div class="active">TOP GAMES</div>
-      </div>
-      <div class="game-list" id="game-list">
-        <!-- Juegos se cargan dinámicamente -->
+      <div class="game-list" id="game-list"></div>
+      <!-- DETALLE -->
+      <div class="game-detail" id="game-detail">
+        <div class="carousel">
+          <button id="prev">⟨</button>
+          <img id="carousel-img" src="" alt="Imagen del juego">
+          <button id="next">⟩</button>
+        </div>
+        <h3 id="detail-title"></h3>
+        <p><b>Fecha de salida:</b> <span id="detail-date"></span></p>
+        <p id="detail-desc"></p>
+        <p><b>Recomendación:</b> <span id="detail-reco"></span></p>
       </div>
     </div>
 
-    <!-- Columna derecha -->
+    <!-- NOTICIAS -->
     <div class="right">
-      <div class="tabs-small2">
-        <div>NEWS & PRESS</div>
-        <div class="active">EVENTS & PROMOTIONS</div>
-      </div>
-      <div class="news">
-        <h4>ROBOT CHICKEN™ Contest</h4>
-        <p>Want a chance to win a PLAYSTATION®3 and appear in an episode of ROBOT CHICKEN™?</p>
-       
-        <h4>PlayStation® tears up the terrain!</h4>
-        <p>We're bringing dirty back! Celebrate offroad fanatics featuring great games, contests and prizes from...</p>
-       
-        <h4>Free Demo Disk Offer</h4>
-        <p>Click here to find out how you can get a free demo disk from the LRCT crew!</p>
-      </div>
+      <h4>NEWS & EVENTS</h4>
+      <p>Próximamente...</p>
     </div>
   </div>
 
   <script>
     const gamesData = {
       ps2: [
-        { title: "Silent Hill 2", console: "PLAYSTATION®2", img: "https://wowroms-photos.com/emulators-roms-logo/41/120457/420-420/Silent+Hill+2+(USA)+(En,Ja,Fr,De,Es,It)+(v2.01)-image.jpg", link: "#" },
-        { title: "Black", console: "PLAYSTATION®2", img: "https://media.vandal.net/ivandal/12/63/1200x630/47/4704/200622723939_1.jpg", link: "#" },
-        { title: "Gran Turismo 4", console: "PLAYSTATION®2", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcAIYvho3VJa3vrvnEeqzxAa51i7k-p-bKdA&s", link: "#" }
+        { 
+          title: "Silent Hill 2", console: "PLAYSTATION®2",
+          img: "https://wowroms-photos.com/emulators-roms-logo/41/120457/420-420/Silent+Hill+2+(USA)+(En,Ja,Fr,De,Es,It)+(v2.01)-image.jpg",
+          date: "24 de septiembre de 2001",
+          desc: "Un survival horror psicológico que sigue a James Sunderland en la misteriosa ciudad de Silent Hill en busca de su esposa fallecida.",
+          reco: "Lo recomiendo por su atmósfera única, historia profunda y uno de los mejores ejemplos del género.",
+          gallery: ["https://variety.com/wp-content/uploads/2018/07/sh2sp.jpg?w=1000&h=667&crop=1","https://upload.wikimedia.org/wikipedia/https://gamershavenonline.com/cdn/shop/files/silenthill2.webp?v=1704316173&width=1https://i.ytimg.com/vi/ydkb-rt0FT0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCf0r9mK7zjjZGlZNOopmrZlh8kSw445en/b/bb/Silent_Hill_2_lake_scene.png","hhttps://i.ytimg.com/vi/ydkb-rt0FT0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCf0r9mK7zjjZGlZNOopmrZlh8kSwttps://upload.wikimedia.org/wikipedia/en/4/43/Silent_Hill_2_Pyramid_Head.png"]
+        },
+        { 
+          title: "Black", console: "PLAYSTATION®2",
+          img: "https://media.vandal.net/ivandal/12/63/1200x630/47/4704/200622723939_1.jpg",
+          date: "24 de febrero de 2006",
+          desc: "Un FPS conocido por su acción explosiva, realismo en armas y escenarios destructibles.",
+          reco: "Si te gustan los shooters clásicos, este es adrenalina pura.",
+          gallery: ["img1.jpg","img2.jpg","img3.jpg"]
+        },
+        { 
+          title: "Gran Turismo 4", console: "PLAYSTATION®2",
+          img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcAIYvho3VJa3vrvnEeqzxAa51i7k-p-bKdA&s",
+          date: "28 de diciembre de 2004",
+          desc: "Un simulador de carreras con cientos de autos y circuitos, referencia absoluta en realismo para su época.",
+          reco: "Si amás los autos, este juego es obligatorio.",
+          gallery: ["img1.jpg","img2.jpg","img3.jpg"]
+        }
       ],
       ps3: [
-        { title: "Call of Duty: Black Ops", console: "PLAYSTATION®3", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtfaoE3_QNsfJGywXHE3_Xmlo6ck--35cayg&s", link: "#" },
-        { title: "Red Dead Redemption", console: "PLAYSTATION®3", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF1htw1C1uRRsVHzt59q9BN5z1ylFLPojDTg&s", link: "#" },
-        { title: "Grand Theft Auto V", console: "PLAYSTATION®3", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0OHzZ1JAkkEu_Bdc_5fZDvRpRUrTKUNxIg&s", link: "#" }
+        { 
+          title: "Call of Duty: Black Ops", console: "PLAYSTATION®3",
+          img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtfaoE3_QNsfJGywXHE3_Xmlo6ck--35cayg&s",
+          date: "9 de noviembre de 2010",
+          desc: "Shooter en primera persona ambientado en la Guerra Fría, con campaña cinematográfica y multijugador icónico.",
+          reco: "Perfecto para viciar online con amigos.",
+          gallery: ["img1.jpg","img2.jpg","img3.jpg"]
+        },
+        { 
+          title: "Red Dead Redemption", console: "PLAYSTATION®3",
+          img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF1htw1C1uRRsVHzt59q9BN5z1ylFLPojDTg&s",
+          date: "18 de mayo de 2010",
+          desc: "Un western en mundo abierto con una historia épica y personajes inolvidables.",
+          reco: "De los mejores mundos abiertos que vas a jugar.",
+          gallery: ["img1.jpg","img2.jpg","img3.jpg"]
+        },
+        { 
+          title: "Grand Theft Auto V", console: "PLAYSTATION®3",
+          img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb0OHzZ1JAkkEu_Bdc_5fZDvRpRUrTKUNxIg&s",
+          date: "17 de septiembre de 2013",
+          desc: "Acción en mundo abierto con tres protagonistas jugables en la ciudad de Los Santos.",
+          reco: "Un clásico moderno que no envejece.",
+          gallery: ["img1.jpg","img2.jpg","img3.jpg"]
+        }
       ],
       psp: [
-        { title: "Silent Hill: Origins", console: "PSP", img: "https://static.wikia.nocookie.net/silenthill/images/6/67/SH0UK.jpg/revision/latest?cb=20110812093753&path-prefix=es", link: "#" },
-        { title: "Silent Hill: Shattered Memories", console: "PSP", img: "https://m.media-amazon.com/images/I/81Y55s6cfaS._UF894,1000_QL80_.jpg", link: "#" },
-        { title: "Metal Gear Solid: Peace Walker", console: "PSP", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZRJWGs-eCTy_hbwnLTeLSHttII0ZEzS8XkA&s", link: "#" }
+        { 
+          title: "Silent Hill: Origins", console: "PSP",
+          img: "https://static.wikia.nocookie.net/silenthill/images/6/67/SH0UK.jpg/revision/latest?cb=20110812093753&path-prefix=es",
+          date: "6 de noviembre de 2007",
+          desc: "Precuela de Silent Hill, donde Travis Grady se ve atrapado en la pesadilla del pueblo maldito.",
+          reco: "Ideal si querés conocer los orígenes de la saga.",
+          gallery: ["img1.jpg","img2.jpg","img3.jpg"]
+        },
+        { 
+          title: "Silent Hill: Shattered Memories", console: "PSP",
+          img: "https://m.media-amazon.com/images/I/81Y55s6cfaS._UF894,1000_QL80_.jpg",
+          date: "25 de enero de 2010",
+          desc: "Reimaginación del primer Silent Hill, sin combates pero con fuerte carga psicológica.",
+          reco: "Recomendado por su narrativa única y tensión constante.",
+          gallery: ["img1.jpg","img2.jpg","img3.jpg"]
+        },
+        { 
+          title: "Metal Gear Solid: Peace Walker", console: "PSP",
+          img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZRJWGs-eCTy_hbwnLTeLSHttII0ZEzS8XkA&s",
+          date: "29 de abril de 2010",
+          desc: "Entrega portátil de la saga Metal Gear, con modo cooperativo y gestión de base.",
+          reco: "Una joya imprescindible para fans de Snake.",
+          gallery: ["img1.jpg","img2.jpg","img3.jpg"]
+        }
       ]
     };
 
     const gameList = document.getElementById("game-list");
     const tabs = document.querySelectorAll(".tabs a");
+    const gameDetail = document.getElementById("game-detail");
+    const detailTitle = document.getElementById("detail-title");
+    const detailDate = document.getElementById("detail-date");
+    const detailDesc = document.getElementById("detail-desc");
+    const detailReco = document.getElementById("detail-reco");
+    const carouselImg = document.getElementById("carousel-img");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+
+    let currentGallery = [];
+    let currentIndex = 0;
 
     function loadGames(consoleType) {
       gameList.innerHTML = "";
@@ -306,15 +260,42 @@
         div.innerHTML = `
           <img src="${game.img}" alt="${game.title}">
           <div class="game-info">
-            <a href="${game.link}">${game.title}</a><br>
-            ${game.console} <br>
-            <a href="#">Official Game Site</a>
+            <a href="#">${game.title}</a><br>
+            ${game.console}
           </div>
         `;
+        div.addEventListener("click", () => showDetail(game));
         gameList.appendChild(div);
       });
+      gameDetail.style.display = "none"; // ocultar detalle al cambiar de tab
     }
 
+    function showDetail(game) {
+      detailTitle.textContent = game.title;
+      detailDate.textContent = game.date;
+      detailDesc.textContent = game.desc;
+      detailReco.textContent = game.reco;
+      currentGallery = game.gallery;
+      currentIndex = 0;
+      carouselImg.src = currentGallery[currentIndex];
+      gameDetail.style.display = "block";
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (currentGallery.length > 0) {
+        currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+        carouselImg.src = currentGallery[currentIndex];
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentGallery.length > 0) {
+        currentIndex = (currentIndex + 1) % currentGallery.length;
+        carouselImg.src = currentGallery[currentIndex];
+      }
+    });
+
+    // Tabs de consolas
     tabs.forEach(tab => {
       tab.addEventListener("click", (e) => {
         e.preventDefault();
@@ -328,6 +309,5 @@
     // Cargar PS2 por defecto
     loadGames("ps2");
   </script>
-
 </body>
 </html>
