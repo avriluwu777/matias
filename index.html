@@ -5,11 +5,9 @@
   <title>PlayStation Store — Retro Style</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    /* Reset simple */
     * { box-sizing: border-box; }
     html,body { height: 100%; margin: 0; font-family: Arial, Helvetica, sans-serif; background: #000; color: #ccc; }
 
-    /* Container wrap */
     .site {
       width: 1000px;
       margin: 18px auto;
@@ -18,7 +16,6 @@
       box-shadow: 0 0 0 6px rgba(0,0,0,0.6);
     }
 
-    /* TOP BAR / HEADER */
     .topbar {
       display: flex;
       align-items: center;
@@ -54,7 +51,6 @@
       background: linear-gradient(#666,#333); color:#fff; border:1px solid #000; padding:6px 8px; cursor:pointer;
     }
 
-    /* BANNER estilo grande con imagen */
     .banner {
       position:relative;
       height:240px;
@@ -73,9 +69,8 @@
       border:1px solid #222; color:#f33; font-weight:bold; font-size:13px;
     }
 
-    /* Tabs horizontales tipo consola (PS3 PSP PS2) */
     .console-tabs {
-      display:flex; background: linear-gradient(#2f2f2f,#111); border-top:4px solid #000; border-bottom:2px solid #000;
+      display:flex; background: linear-gradient(#2f2f2f,#111); border-top:4px solid #000; border-bottom:0px;
     }
     .console-tabs a {
       flex:1; padding:10px 6px; text-align:center; font-weight:700; font-size:13px; color:#cfcfcf; text-decoration:none;
@@ -83,18 +78,27 @@
     }
     .console-tabs a.active { background: linear-gradient(#5a5a5a,#222); color:#fff; }
 
-    /* MAIN lower area with two big columns */
+    .console-indicator {
+      height:6px;
+      display:flex;
+      width:100%;
+      border-bottom:2px solid #000;
+      box-shadow: 0 2px 0 rgba(255,255,255,0.02) inset;
+    }
+    .console-indicator .segment { flex:1; }
+    .console-indicator .s1 { background: linear-gradient(90deg, #3b0f0f, #7a1b1b); }  
+    .console-indicator .s2 { background: linear-gradient(90deg, #3c2b10, #d0a93b); }  
+    .console-indicator .s3 { background: linear-gradient(90deg, #222b31, #789aa6); }   
+
     .main {
       display:flex; gap:12px; padding:12px;
     }
 
-    /* Left column: area grande que replica Qore + listado de juegos + detalle */
     .left-col {
       flex: 0 0 640px;
       display:flex; flex-direction:column; gap:12px;
     }
 
-    /* QORE / Promo boxes row (two boxes) */
     .promo-row {
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -117,7 +121,6 @@
     .promo .promo-right h3 { margin:0 0 6px 0; color:#fff; font-size:14px; }
     .promo .promo-right p { margin:0; color:#bdbdbd; font-size:12px; }
 
-    /* Small thumbnail pack on right of promo */
     .promo .thumbpack { width:160px; height:90px; object-fit:cover; border:1px solid #333; margin-left:12px; }
 
     .game-list {
@@ -137,7 +140,6 @@
     .game-meta a { color:#ff4444; text-decoration:none; font-weight:700; font-size:13px; }
     .game-meta small { display:block; color:#999; margin-top:6px; font-size:11px; }
 
-    /* AREA DETALLE HIDDEN inicialmente */
     .game-detail {
       display:none;
       background:#000; border:1px solid #222; padding:12px; margin-top:8px;
@@ -148,7 +150,42 @@
     .carousel img { width:360px; height:200px; object-fit:cover; border:1px solid #333; }
     .carousel button { background:linear-gradient(#333,#111); color:#fff; border:1px solid #000; padding:6px 10px; cursor:pointer; }
 
-    /* RIGHT COLUMN NEWS */
+    .reviews {
+      margin-top:12px;
+      background: linear-gradient(#070707,#050505);
+      border:1px solid #222;
+      padding:10px;
+      color:#ddd;
+      font-size:13px;
+    }
+    .reviews h4 { margin:0 0 8px 0; color:#ff6666; font-size:14px; }
+    .reviews form { display:flex; gap:8px; flex-direction:column; }
+    .reviews input[type="text"], .reviews textarea, .reviews select {
+      background:#000; color:#ddd; border:1px solid #333; padding:8px; font-size:13px;
+    }
+    .reviews textarea { min-height:70px; resize:vertical; }
+    .reviews .row {
+      display:flex; gap:8px;
+    }
+    .reviews .row input { flex:1; }
+    .reviews button {
+      background: linear-gradient(#666,#333); color:#fff; border:1px solid #000; padding:8px 10px; width:140px; cursor:pointer;
+      align-self:flex-end;
+    }
+    .reviews .reviews-list { margin-top:10px; display:flex; flex-direction:column; gap:8px; }
+    .review-item {
+      background: linear-gradient(#0c0c0c,#050505);
+      border:1px solid #232323;
+      padding:8px;
+      font-size:13px;
+      color:#ddd;
+    }
+    .review-meta { color:#999; font-size:12px; margin-bottom:6px; }
+    .rating-badge {
+      display:inline-block; padding:2px 6px; background:#2b2b2b; border-radius:3px; color:#ffd27a; font-weight:700; font-size:12px;
+      margin-left:8px;
+    }
+
     .right-col {
       flex: 0 0 320px;
       display:flex; flex-direction:column; gap:12px;
@@ -160,13 +197,11 @@
     .news-box h4 { margin:0 0 6px 0; color:#ff6666; font-size:14px; }
     .news-box p { color:#bdbdbd; font-size:13px; line-height:1.3; }
 
-    /* FOOTER style thin */
     .footer {
       padding:10px; text-align:center; font-size:12px; color:#999; border-top:1px solid #111;
       background: linear-gradient(#0c0c0c,#060606);
     }
-
-    /* Responsive small */
+    
     @media (max-width:1050px) {
       .site { width:95%; }
       .left-col { flex-basis: 60%; }
@@ -177,13 +212,13 @@
 </head>
 <body>
   <div class="site">
-    <!-- TOP header -->
     <div class="topbar">
       <div class="logo">
+        
         <img src="https://www.cdnlogo.com/logos/p/29/playstation-2.svg" alt="PS Logo">
         <div style="color:#bbb; font-size:11px;">
           <strong style="color:#fff; font-size:14px;">PLAYSTATION® STORE</strong><br>
-          <span style="font-size:11px; color:#999;">2008</span>
+          <span style="font-size:11px; color:#999;">Legacy — 2000s theme</span>
         </div>
       </div>
 
@@ -204,21 +239,24 @@
     </div>
 
     <div class="banner">
-      <img class="hero" src="banner.png" alt="Banner principal - guarda la captura como banner.png" onerror="this.style.opacity='.12'; this.style.filter='grayscale(1)';">
+      <img class="hero" src="https://cdn2.steamgriddb.com/hero_thumb/4d5c3e59543d48a0ea6152d4bad9a10d.jpg" alt="Banner principal - guarda la captura como banner.png" onerror="this.style.opacity='.12'; this.style.filter='grayscale(1)';">
       <div class="console-label">PLAYSTATION 2</div>
     </div>
 
-    <!-- Tabs consolas -->
     <div class="console-tabs" role="tablist">
       <a href="#" data-console="ps3">PLAYSTATION®3</a>
       <a href="#" data-console="psp">PSP</a>
       <a href="#" data-console="ps2" class="active">PLAYSTATION®2</a>
     </div>
 
-    <!-- MAIN area -->
+    <div class="console-indicator" aria-hidden="true">
+      <div class="segment s1"></div>
+      <div class="segment s2"></div>
+      <div class="segment s3"></div>
+    </div>
+
     <div class="main">
       <div class="left-col">
-        <!-- Promo row (Qore left, Pack PSP right) -->
         <div class="promo-row">
           <div class="promo">
             <div class="bigcircle">Qore™</div>
@@ -242,7 +280,6 @@
           <div class="games" id="game-list">
           </div>
 
-          <!-- Detalle del juego -->
           <div class="game-detail" id="game-detail" aria-hidden="true">
             <div class="carousel">
               <button id="prev">⟨</button>
@@ -253,6 +290,27 @@
             <p style="margin:3px 0;"><strong>Fecha de salida:</strong> <span id="detail-date"></span></p>
             <p id="detail-desc" style="color:#ddd; margin:6px 0;"></p>
             <p style="margin:6px 0;"><strong>Recomendación:</strong> <span id="detail-reco" style="color:#f88"></span></p>
+
+            <div class="reviews" id="reviews-section" aria-live="polite">
+              <h4>Reseñas</h4>
+              <form id="review-form">
+                <div class="row">
+                  <input type="text" id="review-name" placeholder="Tu nombre" required>
+                  <select id="review-rating" title="Puntuación">
+                    <option value="5">★★★★★ 5</option>
+                    <option value="4">★★★★ 4</option>
+                    <option value="3">★★★ 3</option>
+                    <option value="2">★★ 2</option>
+                    <option value="1">★ 1</option>
+                  </select>
+                </div>
+                <textarea id="review-text" placeholder="Escribí tu reseña..." required></textarea>
+                <button type="submit">Enviar reseña</button>
+              </form>
+
+              <div class="reviews-list" id="reviews-list">
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -281,7 +339,6 @@
   </div>
 
   <script>
-    // Datos de juegos
     const gamesData = {
       ps2: [
         {
@@ -382,7 +439,6 @@
       ]
     };
 
-    // Elementos
     const gameList = document.getElementById('game-list');
     const tabs = document.querySelectorAll('.console-tabs a');
     const gameDetail = document.getElementById('game-detail');
@@ -394,8 +450,15 @@
     const prevBtn = document.getElementById('prev');
     const nextBtn = document.getElementById('next');
 
+    const reviewForm = document.getElementById('review-form');
+    const reviewName = document.getElementById('review-name');
+    const reviewRating = document.getElementById('review-rating');
+    const reviewText = document.getElementById('review-text');
+    const reviewsList = document.getElementById('reviews-list');
+
     let currentGallery = [];
     let currentIndex = 0;
+    let currentGameTitle = null;
 
     function renderGameList(consoleType) {
       gameList.innerHTML = '';
@@ -411,15 +474,14 @@
             <div style="color:#999; margin-top:6px; font-size:12px;">${g.desc.substring(0,120)}${g.desc.length>120? '...':''}</div>
           </div>
         `;
-        // click anywhere row opens detalle
         row.addEventListener('click', () => showDetail(g));
         gameList.appendChild(row);
       });
-      // ocultar detalle cuando cambiás de tab
       hideDetail();
     }
 
     function showDetail(game) {
+      currentGameTitle = game.title;
       detailTitle.textContent = game.title;
       detailDate.textContent = game.date;
       detailDesc.textContent = game.desc;
@@ -429,7 +491,7 @@
       carouselImg.src = currentGallery[currentIndex] || game.img;
       gameDetail.style.display = 'block';
       gameDetail.setAttribute('aria-hidden','false');
-      // Scroll hacia detalle en pantallas grandes
+      renderReviews(currentGameTitle);
       setTimeout(()=> {
         gameDetail.scrollIntoView({behavior:'smooth', block:'center'});
       }, 150);
@@ -438,6 +500,7 @@
     function hideDetail() {
       gameDetail.style.display = 'none';
       gameDetail.setAttribute('aria-hidden','true');
+      currentGameTitle = null;
     }
 
     prevBtn.addEventListener('click', (e) => {
@@ -456,7 +519,6 @@
       }
     });
 
-    // Tabs (PS3 PSP PS2)
     tabs.forEach(tab => {
       tab.addEventListener('click', (ev) => {
         ev.preventDefault();
@@ -467,8 +529,84 @@
       });
     });
 
-    // Cargar PS2 por defecto
     renderGameList('ps2');
+    function reviewKeyFor(title) {
+      return 'reviews_' + encodeURIComponent(title);
+    }
+
+    function loadReviewsFor(title) {
+      const key = reviewKeyFor(title);
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        console.error('Error parseando reviews', e);
+        return [];
+      }
+    }
+
+    function saveReviewsFor(title, arr) {
+      const key = reviewKeyFor(title);
+      localStorage.setItem(key, JSON.stringify(arr));
+    }
+
+    function renderReviews(title) {
+      reviewsList.innerHTML = '';
+      if (!title) {
+        reviewsList.innerHTML = '<div style="color:#999;">Seleccioná un juego para ver las reseñas.</div>';
+        return;
+      }
+      const arr = loadReviewsFor(title);
+      if (!arr.length) {
+        reviewsList.innerHTML = '<div style="color:#999;">Todavía no hay reseñas. Sé el primero en opinar 😉</div>';
+        return;
+      }
+
+      arr.slice().reverse().forEach(r => {
+        const d = document.createElement('div');
+        d.className = 'review-item';
+        const date = new Date(r.date);
+        d.innerHTML = `
+          <div class="review-meta"><strong>${escapeHtml(r.name)}</strong> — ${formatDate(date)} <span class="rating-badge">${'★'.repeat(r.rating)}</span></div>
+          <div class="review-text">${escapeHtml(r.text)}</div>
+        `;
+        reviewsList.appendChild(d);
+      });
+    }
+
+    reviewForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!currentGameTitle) {
+        alert('Primero seleccioná un juego para reseñar.');
+        return;
+      }
+      const name = reviewName.value.trim() || 'Anónimo';
+      const rating = parseInt(reviewRating.value) || 5;
+      const text = reviewText.value.trim();
+      if (!text) {
+        alert('Escribí tu reseña antes de enviar.');
+        return;
+      }
+      const arr = loadReviewsFor(currentGameTitle);
+      arr.push({ name, rating, text, date: new Date().toISOString() });
+      saveReviewsFor(currentGameTitle, arr);
+      reviewName.value = '';
+      reviewRating.value = '5';
+      reviewText.value = '';
+      renderReviews(currentGameTitle);
+    });
+
+    function formatDate(d) {
+      const dd = String(d.getDate()).padStart(2,'0');
+      const mm = String(d.getMonth()+1).padStart(2,'0');
+      const yyyy = d.getFullYear();
+      const hh = String(d.getHours()).padStart(2,'0');
+      const min = String(d.getMinutes()).padStart(2,'0');
+      return `${dd}/${mm}/${yyyy} ${hh}:${min}`;
+    }
+    function escapeHtml(s) {
+      return s.replace(/[&<>"'`]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;'})[c]);
+    }
 
   </script>
 </body>
