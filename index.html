@@ -64,7 +64,6 @@
       padding:12px;
       overflow:hidden;
     }
-    /* La imagen principal: guardala como banner.png en la misma carpeta */
     .banner .hero {
       width: 980px; height: 220px; object-fit:cover; border:1px solid #222;
       box-shadow: 0 6px 14px rgba(0,0,0,0.7) inset;
@@ -121,7 +120,6 @@
     /* Small thumbnail pack on right of promo */
     .promo .thumbpack { width:160px; height:90px; object-fit:cover; border:1px solid #333; margin-left:12px; }
 
-    /* LISTA DE JUEGOS - estilo tabla retro */
     .game-list {
       background: linear-gradient(#111,#050505);
       border:1px solid #222; padding:10px;
@@ -182,7 +180,6 @@
     <!-- TOP header -->
     <div class="topbar">
       <div class="logo">
-        <!-- Logo oficial (externo). Si querés lo podés reemplazar por uno local -->
         <img src="https://www.cdnlogo.com/logos/p/29/playstation-2.svg" alt="PS Logo">
         <div style="color:#bbb; font-size:11px;">
           <strong style="color:#fff; font-size:14px;">PLAYSTATION® STORE</strong><br>
@@ -206,9 +203,7 @@
       </div>
     </div>
 
-    <!-- BANNER grande: guardá la imagen como banner.png junto al index -->
     <div class="banner">
-      <!-- Nota: guardá la imagen que me pasaste renombrada a banner.png en la misma carpeta -->
       <img class="hero" src="banner.png" alt="Banner principal - guarda la captura como banner.png" onerror="this.style.opacity='.12'; this.style.filter='grayscale(1)';">
       <div class="console-label">PLAYSTATION 2</div>
     </div>
@@ -242,11 +237,9 @@
           </div>
         </div>
 
-        <!-- Lista de juegos (usa tus juegos) -->
         <div class="game-list">
           <h4>NEW GAMES / RECOMENDADOS</h4>
           <div class="games" id="game-list">
-            <!-- JS inserta aquí las filas de juegos -->
           </div>
 
           <!-- Detalle del juego -->
@@ -287,9 +280,8 @@
     </div>
   </div>
 
-  <!-- SCRIPTS: carga datos de juegos y maneja tabs + detalle + carousel -->
   <script>
-    // Datos de juegos (usé exactamente los que vos pasaste)
+    // Datos de juegos
     const gamesData = {
       ps2: [
         {
@@ -478,8 +470,6 @@
     // Cargar PS2 por defecto
     renderGameList('ps2');
 
-    // Si querés que la imagen banner se muestre mejor, guardala como "banner.png" en la misma carpeta.
-    // Fin del script.
   </script>
 </body>
 </html>
