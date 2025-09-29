@@ -51,7 +51,7 @@
     .login button {
       background: linear-gradient(#666,#333); color:#fff; border:1px solid #000; padding:6px 8px; cursor:pointer;
     }
-    /* Estilo específico para el botón de Registro (ligeramente diferente para distinguirlo) */
+    /* Estilo específico para el botón de Registro */
     #register-btn {
         background: linear-gradient(#111, #000);
         color: #fff;
@@ -60,9 +60,18 @@
     #register-btn:hover {
         background: linear-gradient(#222, #111);
     }
+    /* Estilo específico para el botón de Search */
+    #search-btn {
+        background: linear-gradient(#4a4a4a,#222);
+        color: #fff;
+        border: 1px solid #000;
+    }
+    #search-btn:hover {
+        background: linear-gradient(#5a5a5a,#333);
+    }
     
 
-    /* NUEVOS ESTILOS PARA EL CARRITO */
+    /* ESTILOS PARA EL CARRITO */
     #view-cart-btn {
       background: linear-gradient(#114411,#002200); /* Verde oscuro retro */
       color: #fff;
@@ -82,7 +91,6 @@
         font-size: 10px;
         margin-left: 4px;
     }
-    /* FIN NUEVOS ESTILOS PARA EL CARRITO */
 
 
     .banner {
@@ -168,7 +176,6 @@
     }
     .game-row {
       display:flex; gap:10px; align-items:flex-start; padding:8px; border-bottom:1px solid #1a1a1a;
-      /* Eliminado cursor:pointer; del contenedor para que solo aplique al link */
     }
     .game-row:hover { background: #131313; }
     .game-row img { width:92px; height:128px; object-fit:cover; border:1px solid #333; cursor:pointer; }
@@ -178,7 +185,7 @@
     .game-meta a:hover { text-decoration: underline; }
     .game-meta small { display:block; color:#999; margin-top:6px; font-size:11px; }
 
-    /* NUEVO ESTILO BOTÓN COMPRAR */
+    /* ESTILO BOTÓN COMPRAR */
     .game-actions {
         display: flex;
         align-items: center;
@@ -200,7 +207,6 @@
     .buy-btn:hover {
         background: linear-gradient(#5a5a5a,#333);
     }
-    /* FIN NUEVO ESTILO BOTÓN COMPRAR */
 
 
     .game-detail {
@@ -384,16 +390,22 @@
       </nav> 
 
       <div class="login">
-        <input type="text" placeholder="Email Address" aria-label="email">
+        <input type="text" id="search-input" placeholder="Buscar juego por Título o Descripción" aria-label="término de búsqueda o email">
+        
+        <button id="search-btn" title="Buscar Juego">Search</button>
+
         <input type="password" placeholder="Password" aria-label="password">
-        <button title="login">→</button>
-        <button id="register-btn" title="Registro">Register</button> <button title="buscar">Search</button>
+        
+        <button id="login-btn" title="Iniciar Sesión">→</button> 
+        <button id="register-btn" title="Registro">Register</button>
+        
         <button id="view-cart-btn" title="Ver Carrito">View Cart (<span id="cart-count">0</span>)</button>
-        </div>
+        
+      </div>
     </div>
 
     <div class="banner">
-      <img class="hero" src="https://cdn2.steamgriddb.com/hero_thumb/4d5c3e59543d48a0ea6152d4bad9a10d.jpg" alt="Banner principal - guarda la captura como banner.png" onerror="this.style.opacity='.12'; this.style.filter='grayscale(1)';">
+      <img class="hero" src="https://cdn2.steamgriddb.com/hero_thumb/4d5c3e59543d48a0ea6152d4bad9a10d.jpg" alt="Banner principal">
       <div class="console-label">PLAYSTATION 2</div>
     </div>
 
@@ -416,7 +428,7 @@
             <div class="bigcircle">Qore™</div>
             <div class="promo-right">
               <h3>Presented by The PLAYSTATION™ Network</h3>
-              <p>Un show HD para estar al tanto de todo lo de la PS3/PSP/PS2. Ediciones exclusivas, noticias y trailers.</p>
+              <p>Un show HD para estar al tanto de todo lo de la PS3 PSP PS2. Ediciones exclusivas, noticias y trailers.</p>
             </div>
           </div>
 
@@ -430,7 +442,7 @@
         </div>
 
         <div class="game-list">
-          <h4>NEW GAMES / RECOMENDADOS</h4>
+          <h4 id="game-list-title">NEW GAMES RECOMENDADOS</h4>
           <div class="games" id="game-list">
           </div>
 
@@ -471,12 +483,12 @@
 
       <div class="right-col">
         <div class="news-box">
-          <h4>NEWS & EVENTS</h4>
+          <h4>NEWS EVENTS</h4>
           <p>PlayStation Rising Star presented by Camp Woodward — votá por tus momentos favoritos. Próximas promos y concursos — estad atentos.</p>
         </div>
 
         <div class="news-box">
-          <h4>EVENTS & PROMOS</h4>
+          <h4>EVENTS PROMOS</h4>
           <p>Metal Gear Solid 4 - Octacore Suit Contest. Votá por el mejor mod y ganá packs exclusivos.</p>
         </div>
 
@@ -660,10 +672,15 @@
     const nextBtn = document.getElementById('next');
 
     const reviewForm = document.getElementById('review-form');
-    const reviewName = document.getElementById('review-name');
-    const reviewRating = document.getElementById('review-rating');
-    const reviewText = document.getElementById('review-text');
     const reviewsList = document.getElementById('reviews-list');
+    
+    // ELEMENTOS DE LOGIN Y BÚSQUEDA
+    const loginBtn = document.getElementById('login-btn'); // Botón de flecha (Login)
+    const registerBtn = document.getElementById('register-btn'); 
+    const searchInput = document.getElementById('search-input'); 
+    const searchBtn = document.getElementById('search-btn'); // Botón de búsqueda
+    const gameListTitle = document.querySelector('.game-list h4');
+
 
     // Elementos del carrito
     const viewCartBtn = document.getElementById('view-cart-btn');
@@ -676,11 +693,34 @@
     let currentGallery = [];
     let currentIndex = 0;
     let currentGameTitle = null;
+    let currentConsole = 'ps2'; 
 
-    function renderGameList(consoleType) {
+    function filterAndRenderGames(consoleType, searchTerm = '') {
+      currentConsole = consoleType;
       gameList.innerHTML = '';
       const arr = gamesData[consoleType] || [];
-      arr.forEach((g, idx) => {
+      const term = searchTerm.toLowerCase().trim();
+
+      // Filtrar
+      const filteredGames = arr.filter(g => 
+        g.title.toLowerCase().includes(term) || g.desc.toLowerCase().includes(term)
+      );
+
+      // Actualizar título de la lista
+      if (term) {
+        gameListTitle.textContent = `Resultados para "${term}" en ${consoleType.toUpperCase()}`;
+      } else {
+        gameListTitle.textContent = `NEW GAMES RECOMENDADOS - ${consoleType.toUpperCase()}`;
+      }
+      
+      if (filteredGames.length === 0) {
+        gameList.innerHTML = `<div style="padding: 10px; color: #f88;">No se encontraron juegos que coincidan con "${term}".</div>`;
+        hideDetail();
+        return;
+      }
+
+
+      filteredGames.forEach((g, idx) => {
         const row = document.createElement('div');
         row.className = 'game-row';
         row.innerHTML = `
@@ -708,7 +748,7 @@
         
         // Agregar listener para el botón de compra
         row.querySelector('.buy-btn').addEventListener('click', (ev) => {
-            ev.stopPropagation(); // Evita que se dispare el showDetail si clickean el botón
+            ev.stopPropagation(); 
             addToCart(g.title, g.price, g.img);
         });
 
@@ -716,6 +756,50 @@
       });
       hideDetail();
     }
+    
+    // Función de búsqueda (exclusiva del botón Search y tecla Enter)
+    function handleSearch() {
+        const searchTerm = searchInput.value;
+        filterAndRenderGames(currentConsole, searchTerm);
+    }
+    
+    // --- EVENT LISTENERS DE LOGIN/REGISTRO/BÚSQUEDA ---
+    
+    // 1. INICIAR SESIÓN (Botón flecha '→')
+    loginBtn.addEventListener('click', () => {
+        const email = searchInput.value.trim();
+        const password = document.querySelector('.login input[type="password"]').value.trim();
+        
+        // Opcional: limpiar la vista de búsqueda si estaba activa
+        filterAndRenderGames(currentConsole, ''); 
+
+        if (email && password && email.includes('@')) {
+            alert(`Iniciando sesión con Email: ${email}... ¡Bienvenido de nuevo! (Simulación de login)`);
+        } else if (email || password) {
+             alert('Simulando Login: Por favor, ingresa Email y Password válidos.');
+        } else {
+             alert('Simulando Login: No se ingresaron credenciales.');
+        }
+    });
+
+    // 2. REGISTRO (Botón 'Register')
+    registerBtn.addEventListener('click', () => {
+        alert('¡Bienvenido! Serás redirigido al formulario de registro. (Simulación de registro)');
+    });
+
+    // 3. BÚSQUEDA (Botón 'Search')
+    searchBtn.addEventListener('click', handleSearch);
+
+    // Búsqueda con Enter en el campo de texto
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); 
+            handleSearch();
+        }
+    });
+
+    // --- FIN EVENT LISTENERS DE LOGIN/REGISTRO/BÚSQUEDA ---
+
 
     function showDetail(game) {
       currentGameTitle = game.title;
@@ -762,13 +846,15 @@
         tabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         const consoleType = tab.getAttribute('data-console');
-        renderGameList(consoleType);
+        // Al cambiar de pestaña, limpia el input y renderiza sin filtro
+        searchInput.value = ''; 
+        filterAndRenderGames(consoleType);
       });
     });
 
-    renderGameList('ps2');
+    filterAndRenderGames('ps2'); 
 
-    // --- LÓGICA DE RESEÑAS (Original) ---
+    // --- LÓGICA DE RESEÑAS ---
     function reviewKeyFor(title) {
       return 'reviews_' + encodeURIComponent(title);
     }
@@ -819,6 +905,10 @@
         alert('Primero seleccioná un juego para reseñar.');
         return;
       }
+      const reviewName = document.getElementById('review-name');
+      const reviewRating = document.getElementById('review-rating');
+      const reviewText = document.getElementById('review-text');
+      
       const name = reviewName.value.trim() || 'Anónimo';
       const rating = parseInt(reviewRating.value) || 5;
       const text = reviewText.value.trim();
@@ -848,7 +938,7 @@
     }
     // --- FIN LÓGICA DE RESEÑAS ---
 
-    // --- LÓGICA DEL CARRITO (NUEVO) ---
+    // --- LÓGICA DEL CARRITO ---
 
     function loadCart() {
         try {
@@ -868,7 +958,6 @@
     function addToCart(title, price, img) {
         let cart = loadCart();
         
-        // Comprobar si ya está en el carrito para no duplicar (simulación simple)
         const existingItem = cart.find(item => item.title === title);
 
         if (!existingItem) {
@@ -885,7 +974,7 @@
         let cart = loadCart();
         cart = cart.filter(item => item.title !== title);
         saveCart(cart);
-        renderCart(); // Vuelve a renderizar el modal para actualizar
+        renderCart();
     }
 
     function updateCartCount() {
@@ -928,7 +1017,7 @@
     viewCartBtn.addEventListener('click', () => {
         renderCart();
         cartModalOverlay.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Evita el scroll del fondo
+        document.body.style.overflow = 'hidden';
     });
 
     cartCloseBtn.addEventListener('click', () => {
@@ -945,12 +1034,6 @@
 
     // Inicializar el contador del carrito al cargar
     updateCartCount();
-
-    // Lógica para el botón de Registro (simulación de acción)
-    document.getElementById('register-btn').addEventListener('click', () => {
-        alert('¡Bienvenido! Serás redirigido al formulario de registro. En el futuro, esto conectará con tu base de datos. 😉');
-        // Aquí se podría poner lógica real de redirección o modal de registro
-    });
     // --- FIN LÓGICA DEL CARRITO ---
 
   </script>
