@@ -42,10 +42,15 @@
     nav.mainmenu a:hover { background: linear-gradient(#555,#222); }
 
     .login {
+      /* Estilo actualizado para manejar los 3 inputs y botones */
       display:flex; align-items:center; gap:6px; color:#aaa; font-size:12px;
     }
     .login input {
-      background:#000; color:#ddd; border:1px solid #2a2a2a; padding:5px 6px; font-size:12px; width:140px;
+      background:#000; color:#ddd; border:1px solid #2a2a2a; padding:5px 6px; font-size:12px; width:100px; /* Ancho ajustado */
+    }
+    /* Estilo para el input de búsqueda que es más largo */
+    #search-input {
+      width: 140px; 
     }
     /* Estilo general de botón para LOGIN y REGISTER */
     .login button {
@@ -390,11 +395,12 @@
       </nav> 
 
       <div class="login">
-        <input type="text" id="search-input" placeholder="Buscar juego por Título o Descripción" aria-label="término de búsqueda o email">
+        <input type="text" id="search-input" placeholder="Buscar juego" aria-label="término de búsqueda">
         
         <button id="search-btn" title="Buscar Juego">Search</button>
 
-        <input type="password" placeholder="Password" aria-label="password">
+        <input type="text" id="email-input" placeholder="Email" aria-label="Email de usuario">
+        <input type="password" id="password-input" placeholder="Password" aria-label="Contraseña">
         
         <button id="login-btn" title="Iniciar Sesión">→</button> 
         <button id="register-btn" title="Registro">Register</button>
@@ -677,7 +683,9 @@
     // ELEMENTOS DE LOGIN Y BÚSQUEDA
     const loginBtn = document.getElementById('login-btn'); // Botón de flecha (Login)
     const registerBtn = document.getElementById('register-btn'); 
-    const searchInput = document.getElementById('search-input'); 
+    const searchInput = document.getElementById('search-input'); // Solo para búsqueda de juego
+    const emailInput = document.getElementById('email-input'); // Nuevo campo de Email
+    const passwordInput = document.getElementById('password-input'); // Campo de Password
     const searchBtn = document.getElementById('search-btn'); // Botón de búsqueda
     const gameListTitle = document.querySelector('.game-list h4');
 
@@ -767,14 +775,18 @@
     
     // 1. INICIAR SESIÓN (Botón flecha '→')
     loginBtn.addEventListener('click', () => {
-        const email = searchInput.value.trim();
-        const password = document.querySelector('.login input[type="password"]').value.trim();
+        // Ahora usamos los campos dedicados
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
         
         // Opcional: limpiar la vista de búsqueda si estaba activa
         filterAndRenderGames(currentConsole, ''); 
 
         if (email && password && email.includes('@')) {
             alert(`Iniciando sesión con Email: ${email}... ¡Bienvenido de nuevo! (Simulación de login)`);
+            // Opcional: limpiar campos de login después de la simulación
+            emailInput.value = '';
+            passwordInput.value = '';
         } else if (email || password) {
              alert('Simulando Login: Por favor, ingresa Email y Password válidos.');
         } else {
@@ -790,7 +802,7 @@
     // 3. BÚSQUEDA (Botón 'Search')
     searchBtn.addEventListener('click', handleSearch);
 
-    // Búsqueda con Enter en el campo de texto
+    // Búsqueda con Enter en el campo de texto de búsqueda
     searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault(); 
@@ -846,7 +858,7 @@
         tabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         const consoleType = tab.getAttribute('data-console');
-        // Al cambiar de pestaña, limpia el input y renderiza sin filtro
+        // Al cambiar de pestaña, limpia el input de búsqueda
         searchInput.value = ''; 
         filterAndRenderGames(consoleType);
       });
@@ -936,9 +948,6 @@
     function escapeHtml(s) {
       return s.replace(/[&<>"'`]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;'})[c]);
     }
-    // --- FIN LÓGICA DE RESEÑAS ---
-
-    // --- LÓGICA DEL CARRITO ---
 
     function loadCart() {
         try {
@@ -1013,7 +1022,6 @@
         cartTotalSpan.textContent = `Total: $${total.toFixed(2)}`;
     }
 
-    // Event listeners para el modal del carrito
     viewCartBtn.addEventListener('click', () => {
         renderCart();
         cartModalOverlay.style.display = 'flex';
@@ -1032,9 +1040,7 @@
         }
     });
 
-    // Inicializar el contador del carrito al cargar
-    updateCartCount();
-    // --- FIN LÓGICA DEL CARRITO ---
+    updateCartCount();    
 
   </script>
 </body>
