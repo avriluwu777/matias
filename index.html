@@ -47,9 +47,43 @@
     .login input {
       background:#000; color:#ddd; border:1px solid #2a2a2a; padding:5px 6px; font-size:12px; width:140px;
     }
+    /* Estilo general de botón para LOGIN y REGISTER */
     .login button {
       background: linear-gradient(#666,#333); color:#fff; border:1px solid #000; padding:6px 8px; cursor:pointer;
     }
+    /* Estilo específico para el botón de Registro (ligeramente diferente para distinguirlo) */
+    #register-btn {
+        background: linear-gradient(#111, #000);
+        color: #fff;
+        border: 1px solid #444;
+    }
+    #register-btn:hover {
+        background: linear-gradient(#222, #111);
+    }
+    
+
+    /* NUEVOS ESTILOS PARA EL CARRITO */
+    #view-cart-btn {
+      background: linear-gradient(#114411,#002200); /* Verde oscuro retro */
+      color: #fff;
+      border: 1px solid #000;
+      padding: 6px 8px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    #view-cart-btn:hover { background: linear-gradient(#225522,#003300); }
+    
+    .cart-count {
+        background: #f00;
+        color: white;
+        font-weight: bold;
+        padding: 2px 5px;
+        border-radius: 50%;
+        font-size: 10px;
+        margin-left: 4px;
+    }
+    /* FIN NUEVOS ESTILOS PARA EL CARRITO */
+
 
     .banner {
       position:relative;
@@ -86,9 +120,9 @@
       box-shadow: 0 2px 0 rgba(255,255,255,0.02) inset;
     }
     .console-indicator .segment { flex:1; }
-    .console-indicator .s1 { background: linear-gradient(90deg, #3b0f0f, #7a1b1b); }  
-    .console-indicator .s2 { background: linear-gradient(90deg, #3c2b10, #d0a93b); }  
-    .console-indicator .s3 { background: linear-gradient(90deg, #222b31, #789aa6); }   
+    .console-indicator .s1 { background: linear-gradient(90deg, #3b0f0f, #7a1b1b); } 
+    .console-indicator .s2 { background: linear-gradient(90deg, #3c2b10, #d0a93b); } 
+    .console-indicator .s3 { background: linear-gradient(90deg, #222b31, #789aa6); } 
 
     .main {
       display:flex; gap:12px; padding:12px;
@@ -133,12 +167,41 @@
       display:flex; flex-direction:column; gap:10px;
     }
     .game-row {
-      display:flex; gap:10px; align-items:flex-start; padding:8px; border-bottom:1px solid #1a1a1a; cursor:pointer;
+      display:flex; gap:10px; align-items:flex-start; padding:8px; border-bottom:1px solid #1a1a1a;
+      /* Eliminado cursor:pointer; del contenedor para que solo aplique al link */
     }
-    .game-row img { width:92px; height:128px; object-fit:cover; border:1px solid #333; }
+    .game-row:hover { background: #131313; }
+    .game-row img { width:92px; height:128px; object-fit:cover; border:1px solid #333; cursor:pointer; }
+    .game-row a.game-link { text-decoration: none; cursor: pointer; }
     .game-meta { flex:1; font-size:12px; color:#ccc; }
     .game-meta a { color:#ff4444; text-decoration:none; font-weight:700; font-size:13px; }
+    .game-meta a:hover { text-decoration: underline; }
     .game-meta small { display:block; color:#999; margin-top:6px; font-size:11px; }
+
+    /* NUEVO ESTILO BOTÓN COMPRAR */
+    .game-actions {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+    }
+    .buy-btn {
+        background: linear-gradient(#4a4a4a,#222);
+        color: #fff;
+        border: 1px solid #000;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-radius: 2px;
+        box-shadow: 0 1px 0 rgba(255,255,255,0.05) inset;
+        transition: background 0.1s;
+    }
+    .buy-btn:hover {
+        background: linear-gradient(#5a5a5a,#333);
+    }
+    /* FIN NUEVO ESTILO BOTÓN COMPRAR */
+
 
     .game-detail {
       display:none;
@@ -208,6 +271,99 @@
       .right-col { flex-basis: 40%; }
       .carousel img { width: 100%; height: auto; }
     }
+
+    /* ESTILOS MODAL CARRITO */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .cart-modal {
+        background: linear-gradient(#1b1b1b, #0f0f0f);
+        border: 1px solid #111;
+        box-shadow: 0 0 0 6px rgba(0,0,0,0.6);
+        width: 500px;
+        max-height: 80vh;
+        padding: 20px;
+        position: relative;
+        color: #ccc;
+        overflow-y: auto;
+    }
+
+    .cart-modal h2 {
+        color: #ff6666;
+        border-bottom: 2px solid #222;
+        padding-bottom: 10px;
+        margin-top: 0;
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px dashed #222;
+        font-size: 14px;
+    }
+
+    .cart-item:last-child {
+        border-bottom: none;
+    }
+
+    .cart-item-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cart-item-title {
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .cart-item-remove {
+        background: linear-gradient(#4a4a4a,#222);
+        color: #fff;
+        border: 1px solid #000;
+        padding: 4px 8px;
+        cursor: pointer;
+        font-size: 10px;
+        margin-left: 10px;
+    }
+
+    .cart-item-remove:hover {
+        background: linear-gradient(#5a5a5a,#333);
+    }
+
+    .cart-total {
+        padding-top: 15px;
+        border-top: 2px solid #222;
+        margin-top: 15px;
+        text-align: right;
+        font-size: 16px;
+        font-weight: bold;
+        color: #ff4444;
+    }
+
+    .cart-close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background: linear-gradient(#666,#333);
+        color: #fff;
+        border: 1px solid #000;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+    /* FIN ESTILOS MODAL CARRITO */
+
   </style>
 </head>
 <body>
@@ -224,18 +380,16 @@
 
       <nav class="mainmenu" aria-label="menu principal">
         <a href="#">GAMES</a>
-        <a href="#">MEDIA & DOWNLOADS</a>
-        <a href="#">NEWS</a>
-        <a href="#">FORUMS</a>
         <a href="#">SUPPORT</a>
-      </nav>
+      </nav> 
 
       <div class="login">
         <input type="text" placeholder="Email Address" aria-label="email">
         <input type="password" placeholder="Password" aria-label="password">
         <button title="login">→</button>
-        <button title="buscar">Search</button>
-      </div>
+        <button id="register-btn" title="Registro">Register</button> <button title="buscar">Search</button>
+        <button id="view-cart-btn" title="Ver Carrito">View Cart (<span id="cart-count">0</span>)</button>
+        </div>
     </div>
 
     <div class="banner">
@@ -338,6 +492,17 @@
     </div>
   </div>
 
+  <div id="cart-modal-overlay" class="modal-overlay">
+    <div id="cart-modal" class="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+        <button id="cart-close-btn" class="cart-close-btn">X</button>
+        <h2 id="cart-title">CARRITO DE COMPRAS</h2>
+        <div id="cart-items-container">
+            </div>
+        <div id="cart-total" class="cart-total">
+            Total: $0.00
+        </div>
+    </div>
+  </div>
   <script>
     const gamesData = {
       ps2: [
@@ -348,6 +513,7 @@
           date: "24 de septiembre de 2001",
           desc: "Un survival horror psicológico que sigue a James Sunderland en la misteriosa ciudad de Silent Hill en busca de su esposa fallecida.",
           reco: "Lo recomiendo por su atmósfera única, historia profunda y uno de los mejores ejemplos del género.",
+          price: 9.99,
           gallery: [
             "https://variety.com/wp-content/uploads/2018/07/sh2sp.jpg?w=1000&h=667&crop=1",
             "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/Y4AHAHCYH5NSPJFFGKNPQ22EC4.jpg",
@@ -362,6 +528,7 @@
           date: "24 de febrero de 2006",
           desc: "Un FPS conocido por su acción explosiva, realismo en armas y escenarios destructibles.",
           reco: "Si te gustan los shooters clásicos, este es adrenalina pura.",
+          price: 7.99,
           gallery: [
             "https://images.pushsquare.com/e4d4ea1e35043/black-ps2-playstation-2-2.large.jpg",
             "https://i.ytimg.com/vi/Xns9rdSgHts/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDzN7_aWU9nLu7xzww9XrcKIF0dmg",
@@ -376,6 +543,7 @@
           date: "28 de diciembre de 2004",
           desc: "Un simulador de carreras con cientos de autos y circuitos, referente absoluto en realismo para su época.",
           reco: "Si amás los autos, este juego es obligatorio.",
+          price: 5.99,
           gallery: [
             "https://traxion.gg/wp-content/uploads/2022/02/Why-Gran-Turismo-4-is-the-series-peak-so-far....jpg",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvC_Rg2nlajikVXF6kq0IUmIV462PPn4UyUg&s",
@@ -392,6 +560,7 @@
           date: "9 de noviembre de 2010",
           desc: "Shooter en primera persona ambientado en la Guerra Fría, con campaña cinematográfica y multijugador icónico.",
           reco: "Perfecto para viciar online con amigos.",
+          price: 14.99,
           gallery: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShs2ZdvkWOe0WOSK1jNz8V9U3TEb-Fxs_aRg&s",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBWelWPGX8z-gasXTD5y94I00pxrETGyfllA&s",
@@ -406,6 +575,7 @@
           date: "18 de mayo de 2010",
           desc: "Un western en mundo abierto con una historia épica y personajes inolvidables.",
           reco: "De los mejores mundos abiertos que vas a jugar.",
+          price: 19.99,
           gallery: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4M1QexkyFyBQzANBgiiRNcoHj2kodLQ8hRQ&s",
             "https://upload.wikimedia.org/wikipedia/en/thumb/b/b2/RedDeadRedemptionGameplay.jpg/350px-RedDeadRedemptionGameplay.jpg",
@@ -420,6 +590,7 @@
           date: "17 de septiembre de 2013",
           desc: "Un videojuego de acción y aventura en mundo abierto. El juego permite a los jugadores explorar el estado ficticio de San Andreas y sus alrededores, mientras siguen la historia de tres protagonistas: Michael, Franklin y Trevor.",
           reco: "Ideal para aquellos que buscan una historia profunda, exploración de un vasto mundo abierto, y misiones variadas y rejugables.",
+          price: 24.99,
           gallery: [
             "https://media.gamestop.com/i/gamestop/10106497_10106499_10115457_10115461_10115462_10161249_10161250_SCR17?$screen$",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJ38ljFBHnRTKBUX2Rnj8BibkDCRlfD2n1BQ&shttps://m.media-amazon.com/images/I/81m9X3XQ0PL._AC_SY679_.jpg",
@@ -436,6 +607,7 @@
           date: "6 de noviembre de 2007",
           desc: "Precuela de Silent Hill, donde Travis Grady se ve atrapado en la pesadilla del pueblo maldito.",
           reco: "Ideal si querés conocer los orígenes de la saga.",
+          price: 8.99,
           gallery: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT93-Q4ukJ3EU1TgdLcyll0vlVzpaPxhDkFcg&s",
             "https://miro.medium.com/v2/resize:fit:960/0*kp2WyhPU5PY71QBl.jpg",
@@ -450,6 +622,7 @@
           date: "29 de abril de 2010",
           desc: "Entrega portátil de la saga Metal Gear, con modo cooperativo y gestión de base.",
           reco: "Una joya imprescindible para fans de Snake.",
+          price: 11.99,
           gallery: [
             "https://i.ytimg.com/vi/yiEeX5zChr4/maxresdefault.jpg",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS89q3bSRLnFPGPzymKEUwfonAD1AgTjZWlXg&s",
@@ -464,6 +637,7 @@
           date: "29 de octubre de 2007",
           desc: "Juego de terror y sigilo con un alto contenido de violencia y censura.",
           reco: "Altamente polémico y no apto para todos los públicos, para fans del género maduro.",
+          price: 6.99,
           gallery: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST6dULbbJ_-57XQjYuKVdMhG6NwjKElzWM-Q&s",
             "https://m.media-amazon.com/images/M/MV5BYWQxMjZlNzItM2NhMC00YjI0LTllODYtZTI1ZWI1ZTU2NzA2XkEyXkFqcGc@._V1_.jpg",
@@ -491,6 +665,14 @@
     const reviewText = document.getElementById('review-text');
     const reviewsList = document.getElementById('reviews-list');
 
+    // Elementos del carrito
+    const viewCartBtn = document.getElementById('view-cart-btn');
+    const cartCountSpan = document.getElementById('cart-count');
+    const cartModalOverlay = document.getElementById('cart-modal-overlay');
+    const cartCloseBtn = document.getElementById('cart-close-btn');
+    const cartItemsContainer = document.getElementById('cart-items-container');
+    const cartTotalSpan = document.getElementById('cart-total');
+
     let currentGallery = [];
     let currentIndex = 0;
     let currentGameTitle = null;
@@ -504,12 +686,32 @@
         row.innerHTML = `
           <img src="${g.img}" alt="${g.title}">
           <div class="game-meta">
-            <a href="#" data-console="${consoleType}" data-index="${idx}">${g.title}</a>
+            <a href="#" class="game-link" data-console="${consoleType}" data-index="${idx}">${g.title}</a>
             <small>${g.console} — ${g.date}</small>
+            <div style="color:#ddd; margin-top:6px; font-size:13px;">Precio: <strong>$${g.price.toFixed(2)}</strong></div>
             <div style="color:#999; margin-top:6px; font-size:12px;">${g.desc.substring(0,120)}${g.desc.length>120? '...':''}</div>
           </div>
+          <div class="game-actions">
+            <button class="buy-btn" data-title="${escapeHtml(g.title)}" data-price="${g.price}" data-img="${g.img}">BUY NOW</button>
+          </div>
         `;
-        row.addEventListener('click', () => showDetail(g));
+        
+        // Agregar listener para mostrar el detalle al hacer click en la imagen o el título
+        const img = row.querySelector('img');
+        const link = row.querySelector('.game-link');
+
+        img.addEventListener('click', () => showDetail(g));
+        link.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            showDetail(g);
+        });
+        
+        // Agregar listener para el botón de compra
+        row.querySelector('.buy-btn').addEventListener('click', (ev) => {
+            ev.stopPropagation(); // Evita que se dispare el showDetail si clickean el botón
+            addToCart(g.title, g.price, g.img);
+        });
+
         gameList.appendChild(row);
       });
       hideDetail();
@@ -565,6 +767,8 @@
     });
 
     renderGameList('ps2');
+
+    // --- LÓGICA DE RESEÑAS (Original) ---
     function reviewKeyFor(title) {
       return 'reviews_' + encodeURIComponent(title);
     }
@@ -642,6 +846,112 @@
     function escapeHtml(s) {
       return s.replace(/[&<>"'`]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;'})[c]);
     }
+    // --- FIN LÓGICA DE RESEÑAS ---
+
+    // --- LÓGICA DEL CARRITO (NUEVO) ---
+
+    function loadCart() {
+        try {
+            const raw = localStorage.getItem('shopping_cart');
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+            console.error('Error cargando carrito', e);
+            return [];
+        }
+    }
+
+    function saveCart(cartArray) {
+        localStorage.setItem('shopping_cart', JSON.stringify(cartArray));
+        updateCartCount();
+    }
+
+    function addToCart(title, price, img) {
+        let cart = loadCart();
+        
+        // Comprobar si ya está en el carrito para no duplicar (simulación simple)
+        const existingItem = cart.find(item => item.title === title);
+
+        if (!existingItem) {
+            cart.push({ title, price, img, quantity: 1 });
+            saveCart(cart);
+            alert(`"${title}" agregado al carrito!`);
+        } else {
+            alert(`"${title}" ya está en el carrito.`);
+        }
+        
+    }
+
+    function removeFromCart(title) {
+        let cart = loadCart();
+        cart = cart.filter(item => item.title !== title);
+        saveCart(cart);
+        renderCart(); // Vuelve a renderizar el modal para actualizar
+    }
+
+    function updateCartCount() {
+        const cart = loadCart();
+        cartCountSpan.textContent = cart.length;
+    }
+
+    function renderCart() {
+        const cart = loadCart();
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p style="text-align:center; color:#999; margin-top:20px;">El carrito está vacío. ¡Añade algunos juegos!</p>';
+        } else {
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `
+                    <div class="cart-item-info">
+                        <span class="cart-item-title">${escapeHtml(item.title)}</span>
+                        <span>$${item.price.toFixed(2)}</span>
+                    </div>
+                    <button class="cart-item-remove" data-title="${escapeHtml(item.title)}">REMOVE</button>
+                `;
+                cartItemsContainer.appendChild(itemDiv);
+                total += item.price;
+
+                itemDiv.querySelector('.cart-item-remove').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    removeFromCart(item.title);
+                });
+            });
+        }
+
+        cartTotalSpan.textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    // Event listeners para el modal del carrito
+    viewCartBtn.addEventListener('click', () => {
+        renderCart();
+        cartModalOverlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Evita el scroll del fondo
+    });
+
+    cartCloseBtn.addEventListener('click', () => {
+        cartModalOverlay.style.display = 'none';
+        document.body.style.overflow = '';
+    });
+
+    cartModalOverlay.addEventListener('click', (e) => {
+        if (e.target === cartModalOverlay) {
+            cartModalOverlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Inicializar el contador del carrito al cargar
+    updateCartCount();
+
+    // Lógica para el botón de Registro (simulación de acción)
+    document.getElementById('register-btn').addEventListener('click', () => {
+        alert('¡Bienvenido! Serás redirigido al formulario de registro. En el futuro, esto conectará con tu base de datos. 😉');
+        // Aquí se podría poner lógica real de redirección o modal de registro
+    });
+    // --- FIN LÓGICA DEL CARRITO ---
 
   </script>
 </body>
